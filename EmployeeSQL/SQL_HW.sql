@@ -17,8 +17,8 @@ CREATE TABLE "departments" (
 CREATE TABLE "salaries" (
     "emp_no" int   NOT NULL,
     "salary" int   NOT NULL,
-    "from_date" varchar   NOT NULL,
-    "to_date" varchar   NOT NULL,
+    "from_date" date   NOT NULL,
+    "to_date" date   NOT NULL,
     CONSTRAINT "pk_salaries" PRIMARY KEY (
         "emp_no"
      )
@@ -26,11 +26,11 @@ CREATE TABLE "salaries" (
 
 CREATE TABLE "employees" (
     "emp_no" int   NOT NULL,
-    "birth_date" varchar   NOT NULL,
+    "birth_date" date   NOT NULL,
     "first_name" varchar   NOT NULL,
     "last_name" varchar   NOT NULL,
     "gender" varchar   NOT NULL,
-    "hire_date" varchar   NOT NULL,
+    "hire_date" date   NOT NULL,
     CONSTRAINT "pk_employees" PRIMARY KEY (
         "emp_no"
      )
@@ -40,25 +40,22 @@ CREATE TABLE "employees" (
 CREATE TABLE "dept_manager" (
     "dept_no" varchar   NOT NULL,
     "emp_no" int   NOT NULL,
-    "from_date" varchar   NOT NULL,
-    "to_date" varchar   NOT NULL,
-    CONSTRAINT "pk_dept_manager" PRIMARY KEY (
-        "emp_no"
-     )
+    "from_date" date   NOT NULL,
+    "to_date" date   NOT NULL
 );
 
 CREATE TABLE "titles" (
     "emp_no" int   NOT NULL,
     "title" varchar   NOT NULL,
-    "from_date" varchar   NOT NULL,
-    "to_date" varchar   NOT NULL
+    "from_date" date   NOT NULL,
+    "to_date" date   NOT NULL
 );
 
 CREATE TABLE "dep_emp" (
     "emp_no" int   NOT NULL,
     "dept_no" varchar   NOT NULL,
-    "from_date" varchar   NOT NULL,
-    "to_date" varchar   NOT NULL
+    "from_date" date   NOT NULL,
+    "to_date" date   NOT NULL
 
 );
 
@@ -71,6 +68,7 @@ select e.emp_no, e.last_name, e.first_name, e.gender, s.salary
 from employees e
 left join salaries s
 on e.emp_no = s.emp_no
+--order by emp_no asc;
 
 --Q2 list of employees who were hired in 1986
 
@@ -125,6 +123,7 @@ on d.dept_no = de.dept_no
 left join employees e
 on de.emp_no = e.emp_no
 where dept_name = 'Sales' or dept_name = 'Development'
+--other option(not sure what you're asking for here) where dept_name in ('Sales', 'Development')
 --order by last_name asc, first_name asc
 
 
